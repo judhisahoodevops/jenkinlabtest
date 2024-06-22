@@ -1,17 +1,6 @@
 #!/bin/sh
 set -e
 
-get_ip_address() {
-    hostname -I | awk '{print $1}'
-}
-
-# Define the network interface you want to get the IP address for
-NETWORK_INTERFACE="eth0"
-
-
-# Get the current IP address
-CURRENT_IP=$(get_ip_address $NETWORK_INTERFACE)
-echo "CURRENT_IP with netwrok address ::  $CURRENT_IP"
 
 # If the CURRENT_IP is empty, fall back to the first IP address
 if [ -z "$CURRENT_IP" ]; then
@@ -37,7 +26,7 @@ if [ -z "$APP_KEY" ]; then
     echo "APP_URL..."
     echo "$APP_URL"
     # Update APP_URL
-    sed -i 's|APP_URL=http://localhost|APP_URL=http://'"$CURRENT_IP"':8087|' "$ENV_FILE"
+    sed -i 's|APP_URL=http://localhost|APP_URL=104.197.144.178:8087|' "$ENV_FILE"
     echo "APP_URL..."
     echo "$APP_URL"
 
@@ -59,7 +48,7 @@ else
     echo "APP_URL..."
     echo "$APP_URL"
     # Update APP_URL
-    sed -i 's|APP_URL=http://localhost|APP_URL=http://'"$CURRENT_IP"':8087|' "$ENV_FILE"
+    sed -i 's|APP_URL=http://localhost|APP_URL=http://104.197.144.178:8087|' "$ENV_FILE"
     echo "APP_URL..."
     echo "$APP_URL"
 
