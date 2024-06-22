@@ -10,7 +10,7 @@ if [ -f "$ENV_FILE" ]; then
 else
     echo ".env file not found. Creating from .env.example..."
     # Copy .env.example to .env
-    cp /var/www/html/.env.example "$ENV_FILE"
+    cp "$ENV_EXAMPLE_FILE" "$ENV_FILE"
 fi
 . "$ENV_FILE"
 # Check if APP_KEY is set and not empty
@@ -37,6 +37,8 @@ if [ -z "$APP_KEY" ]; then
 else
     echo "$APP_KEY"
     echo "APP_KEY is already set."
+    echo "Configuration updated. Generating a new key..."
+    php artisan key:generate
 fi
 
 # if [ -f /var/www/html/.env ]; then
@@ -45,8 +47,6 @@ fi
 # else
 #     echo ".env file not found................................."
 # fi
-echo "Configuration updated. Generating a new key..."
-php artisan key:generate
 
 echo "call optimize:clear command to clear all"
 php artisan optimize:clear
