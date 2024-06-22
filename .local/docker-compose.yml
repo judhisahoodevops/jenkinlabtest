@@ -1,0 +1,74 @@
+version: '3.8'
+name: jenkinslabtest
+services:
+
+  #PHP Service
+  webserver:
+    build:
+      context: ..
+      dockerfile: .local/Dockerfile
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8087:80"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html/
+    volumes:
+       - ../:/var/www/html/
+       - /var/www/html/vendor/
+    networks:
+      - app-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+       - mariadb
+       - redisdb
+
+  #MariaDB Service
+  mariadb:
+    image: mariadb:10.2.32
+    restart:  unless-stopped
+    tty: true
+    ports:
+      - "33081:3306"
+    environment:
+      MYSQL_DATABASE: jenkinslabtest
+      MYSQL_ROOT_PASSWORD: 123465
+      SERVICE_NAME: mariadb
+      SERVICE_TAGS: dev
+    volumes:
+      - mariadbdata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+  #Redis Service
+  redisdb:
+    image: redis
+    restart: always
+    tty: true
+    ports:
+      - "6383:6379"
+    environment:
+      SERVICE_NAME: redis
+      SERVICE_TAGS: dev
+    volumes:
+      - redisdata:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - app-network  
+
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  mariadbdata:
+    driver: local  
+  redisdata:
+    driver: local
