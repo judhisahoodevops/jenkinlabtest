@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 
+chmod -R 777 /var/www/html/storage
 
 # If the CURRENT_IP is empty, fall back to the first IP address
 if [ -z "$CURRENT_IP" ]; then
@@ -26,7 +27,7 @@ if [ -z "$APP_KEY" ]; then
     echo "APP_URL..."
     echo "$APP_URL"
     # Update APP_URL
-    sed -i 's|APP_URL=http://localhost|APP_URL=104.197.144.178:8087|' "$ENV_FILE"
+    sed -i 's|APP_URL=http://localhost|APP_URL=http://104.197.144.178:8087|' "$ENV_FILE"
     echo "APP_URL..."
     echo "$APP_URL"
 
