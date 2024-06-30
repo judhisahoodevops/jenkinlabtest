@@ -1,0 +1,2 @@
+sudo docker rm -f $(sudo docker ps -a -q)
+sudo docker-compose -f /home/ubuntu/jenkins/workspace/devlopment/.local/docker-compose.yml up --build -d
