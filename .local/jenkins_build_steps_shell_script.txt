@@ -1,8 +1,8 @@
 # Access the master virtual machine, use bellow command and step to Configure Jenkins User with Passwordless Sudo
 # user ubuntu terminal fire 
-################## sudo visudo
+##################= sudo visudo
 ###Add the following line to grant the Jenkins user passwordless sudo access:
-################## jenkins ALL=(ALL) NOPASSWD: ALL
+##################= jenkins ALL=(ALL) NOPASSWD: ALL
 # then PRESS ESC key and use "!wq" and press ENTER key then bellow sudo command will work fine.
 sudo apt update
 sudo apt upgrade -y
