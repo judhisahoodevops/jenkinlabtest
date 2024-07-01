@@ -34,4 +34,3 @@ else
   echo "One or no containers found. No removal needed."
 fi
 sudo docker-compose -f /home/ubuntu/jenkins/workspace/devlopment/.local/docker-compose.yml up --build -d
-#New Line added
