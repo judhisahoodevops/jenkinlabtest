@@ -1,3 +1,4 @@
+##  git hub web hook secreate generated in jenkin user panel in GCP ::: 11a059e8915cadb633ce14a1afed2a53d1    for ip  http://35.239.156.84/
 # Access the master virtual machine, use bellow command and step to Configure Jenkins User with Passwordless Sudo
 # user ubuntu terminal fire 
 ##################= sudo visudo
